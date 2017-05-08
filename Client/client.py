@@ -1,21 +1,6 @@
-from ThreadedSocketServer.Server import ThreadedSocketServer
 import Tkinter as tk
-
-class KahootServer(ThreadedSocketServer):
-    
-    def __init__(self, port):
-        ThreadedSocketServer.__init__(self, port)
-    
-    def onmessage(self, client, message):
-        print "Client Sent Message"
-        #Sending message to all clients
-        self.broadcast(message)
-    
-    def onopen(self, client):
-        print "Client Connected"
-    
-    def onclose(self, client):
-        print "Client Disconnected"
+import thread
+import time
 
 class ButtonsPane(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -45,8 +30,8 @@ class ButtonsPane(tk.Frame):
 class InfoPane(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.time_label = tk.Label(self, text="00:20", font=self.get_font())
-        self.question_label = tk.Label(self, text="Question will appear here...", font=self.get_font(36))
+        self.time_label = tk.Label(self, text="00:20", font=self.get_font(), bg=None)
+        self.question_label = tk.Label(self, text="Question will appear here...", font=self.get_font(36), bg=None)
 
         self.layout()
 
@@ -58,18 +43,26 @@ class InfoPane(tk.Frame):
         self.time_label.pack(side='top', anchor='nw')
         self.question_label.pack(fill='both', anchor='center', expand=True)
 
-class KahootServerView(tk.Frame):
+class KahootClientView(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
-        self.buttons = ButtonsPane(self)
-        self.info_pane = InfoPane(self)
+        self.parent.title('Kahoot')
+        self.buttons = ButtonsPane(self, bg='')
+        self.info_pane = InfoPane(self, bg='')
 
-        self.set_geometry()
+        self.set_geometry(1000, 600)
         self.set_widgets()
+        self.change_background_color()
 
-    def set_geometry(self):
-        self.parent.attributes('-fullscreen', True)
+    def set_geometry(self, width, height):
+        self.parent.update_idletasks()
+        screen_width = self.parent.winfo_screenwidth()
+        screen_height = self.parent.winfo_screenheight()
+        x = screen_width / 2 - width / 2
+        y = screen_height / 2 - height / 2
+        self.parent.geometry("%dx%d+%d+%d" % (width, height, x, y))
+
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=2)
         self.columnconfigure(0, weight=1)
@@ -78,12 +71,33 @@ class KahootServerView(tk.Frame):
         self.buttons.grid(row=1, column=0, pady=16, padx=16, sticky='NSEW')
         self.info_pane.grid(row=0, column=0, pady=16, padx=32, sticky='NSEW')
 
+    def change_background_color(self):
+        colors = [
+        '#45a3e5',
+        '#66bf39',
+        '#eb670f',
+        '#f35',
+        '#864cbf'
+        ]
+        self.configure(background=colors[0])
+        thread.start_new_thread(self.change_color, (colors,))
+
+    def change_color(self, colors):
+        i = 1
+        while 1:
+            self.configure(background=colors[i % len(colors)])
+            self.info_pane.configure(background=colors[i % len(colors)])
+            self.buttons.configure(background=colors[i % len(colors)])
+            self.info_pane.time_label.configure(background=colors[i % len(colors)])
+            self.info_pane.question_label.configure(background=colors[i % len(colors)])
+
+            time.sleep(5)
+            i += 1
+        threa.exit
+
 def main():
-    #port = 8080
-    #server = KahootServer(port)
-    #server.run()
     root = tk.Tk()
-    KahootServerView(root).pack(side="top", fill="both", expand=True)
+    KahootClientView(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
 
 if __name__ == "__main__":
