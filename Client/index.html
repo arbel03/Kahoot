@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+     <script>
+            var socket = new WebSocket('ws://'+window.location.hostname+':8080');
+            socket.addEventListener('open', function (event) {
+                socket.send(JSON.stringify({"type":"auth", "data": "arbel03"}));
+            });
+            socket.addEventListener('message', function (event) {
+                console.log('Message from server', event.data);
+            });
+     </script>
+</head>
+<body>
+
+</body>
+</html>

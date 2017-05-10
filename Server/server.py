@@ -1,89 +1,90 @@
-from ThreadedSocketServer.Server import ThreadedSocketServer
-import Tkinter as tk
+from Tkinter import Tk
+from view.GameScreen import GameScreen
+from view.WaitingScreen import WaitingScreen
+from SimpleWebSocketServer import *
+from HTTPServer.RootedHTTPServer import *
+import os
+import threading
+import json
 
-class KahootServer(ThreadedSocketServer):
-    
-    def __init__(self, port):
-        ThreadedSocketServer.__init__(self, port)
-    
-    def onmessage(self, client, message):
-        print "Client Sent Message"
-        #Sending message to all clients
-        self.broadcast(message)
-    
-    def onopen(self, client):
-        print "Client Connected"
-    
-    def onclose(self, client):
-        print "Client Disconnected"
 
-class ButtonsPane(tk.Frame):
-    def __init__(self, parent, *args, **kwargs):
-        tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.set_buttons()
+class KahootServer(SimpleWebSocketServer):
+    class KahootClient(WebSocket):
+        """This is a class handler for websockets clients,
+        Changing static members to functions are a way to communicate between an object
+        and this class interface"""
 
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(1, weight=1)
+        def handleMessage(self):
+            # echo message back to client
+            try:
+                self.handler.handle_message(self, str(self.data))
+            except ValueError as ex:
+                print ex
 
-    def get_font(self, size=20):
-        import tkFont
-        return tkFont.Font(family='Helvetica Light', size=size)
+        def handleConnected(self):
+            self.handler.clients[self] = None
+            print self.address, "connected"
 
-    def set_buttons(self):
-        triangle = tk.Button(self, background='#e21b3c', font=self.get_font(), fg='white')
-        diamond = tk.Button(self, background='#1368ce', font=self.get_font(), fg='white')
-        circle = tk.Button(self, background='#ffa602', font=self.get_font(), fg='white')
-        square = tk.Button(self, background='#298f0d', font=self.get_font(), fg='white')
+        def handleClose(self):
+            self.handler.client_disconnected(self)
+            print self.address, "disconnected"
 
-        triangle.grid(row=0, column=0, sticky='NSEW', padx=8, pady=8)
-        diamond.grid(row=0, column=1, sticky='NSEW', padx=8, pady=8)
-        circle.grid(row=1, column=0, sticky='NSEW', padx=8, pady=8)
-        square.grid(row=1, column=1, sticky='NSEW', padx=8, pady=8)
+    def __init__(self, address):
+        self.KahootClient.handler = self
+        self.clients = {}
+        SimpleWebSocketServer.__init__(self, address[0], address[1], self.KahootClient)
 
-class InfoPane(tk.Frame):
-    def __init__(self, parent, *args, **kwargs):
-        tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.time_label = tk.Label(self, text="00:20", font=self.get_font())
-        self.question_label = tk.Label(self, text="Question will appear here...", font=self.get_font(36))
+    def handle_message(self, client, data):
+        data = json.loads(data)
+        if data['type'] == 'auth':
+            self.clients[client] = (data['data'], None)
+            self.clients_updated()
 
-        self.layout()
+    def client_disconnected(self, client):
+        # If the client was in the game we update the usernames screen
+        if client in self.clients.keys():
+            self.clients_updated()
+        del self.clients[client]
 
-    def get_font(self, size=20):
-        import tkFont
-        return tkFont.Font(family='Helvetica Bold', size=size)
+class Controller:
+    def __init__(self, root):
+        self.root = root
 
-    def layout(self):
-        self.time_label.pack(side='top', anchor='nw')
-        self.question_label.pack(fill='both', anchor='center', expand=True)
+        self.game_screen = GameScreen(self.root)
+        self.waiting_screen = WaitingScreen(self.root)
+        #self.add_screen(self.game_screen)
+        self.add_screen(self.waiting_screen)
+        self.show_screen(self.waiting_screen)
 
-class KahootServerView(tk.Frame):
-    def __init__(self, parent, *args, **kwargs):
-        tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.parent = parent
-        self.buttons = ButtonsPane(self)
-        self.info_pane = InfoPane(self)
+        self.websocket_server = KahootServer(('', 8080))
+        self.websocket_server.clients_updated = self.clients_updated
+        # HTTP server in a specific path
+        self.http_server = RootedHTTPServer(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))+'\Client',\
+                                            ('', 80), \
+                                            RootedHTTPRequestHandler)
+        #self.root.attributes('-fullscreen', True)
 
-        self.set_geometry()
-        self.set_widgets()
+    def add_screen(self, screen):
+        screen.pack(side="top", fill="both", expand=True)
+        screen.pack_forget()
 
-    def set_geometry(self):
-        self.parent.attributes('-fullscreen', True)
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=2)
-        self.columnconfigure(0, weight=1)
+    def show_screen(self, screen):
+        screen.pack(side="top", fill="both", expand=True)
 
-    def set_widgets(self):
-        self.buttons.grid(row=1, column=0, pady=16, padx=16, sticky='NSEW')
-        self.info_pane.grid(row=0, column=0, pady=16, padx=32, sticky='NSEW')
+    def start_servers(self):
+        http_server_thread = threading.Thread(target=self.http_server.serve_forever)
+        websocket_server_thread = threading.Thread(target=self.websocket_server.serveforever)
+        http_server_thread.start()
+        websocket_server_thread.start()
+        print "Servers started servers"
+
+    def clients_updated(self):
+        self.waiting_screen.update_usernames(map(lambda user: user[0], self.websocket_server.clients.values()))
 
 def main():
-    #port = 8080
-    #server = KahootServer(port)
-    #server.run()
-    root = tk.Tk()
-    KahootServerView(root).pack(side="top", fill="both", expand=True)
+    root = Tk()
+    kahoot_server = Controller(root)
+    kahoot_server.start_servers()
     root.mainloop()
 
 if __name__ == "__main__":
