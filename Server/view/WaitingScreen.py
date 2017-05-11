@@ -24,13 +24,13 @@ class UsernamesWall(tk.Frame):
 
         # Removing all labels
         for i in self.labels:
-            i.visible = False
+            i.grid_forget()
 
         # Adding labels the amount we actually need
         for i in range(0, len(names)):
-            self.labels[i].visible = True
             self.labels[i].config(text=names[i])
             self.labels[i].grid(row=i / self.columns, column=i % self.columns, sticky="NEWS", padx=16, pady=8)
+
 
 class WaitingScreen(tk.Frame):
     def __init__(self, parent, *args, **kwargs):

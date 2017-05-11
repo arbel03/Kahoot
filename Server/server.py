@@ -8,43 +8,43 @@ import threading
 import json
 
 
-class KahootServer(SimpleWebSocketServer):
-    class KahootClient(WebSocket):
-        """This is a class handler for websockets clients,
-        Changing static members to functions are a way to communicate between an object
-        and this class interface"""
+class KahootClient(WebSocket):
+    """This is a class handler for websockets clients,
+    Changing static members to functions are a way to communicate between an object
+    and this class interface"""
 
-        def handleMessage(self):
-            # echo message back to client
-            try:
-                self.handler.handle_message(self, str(self.data))
-            except ValueError as ex:
-                print ex
+    def handleMessage(self):
+        # echo message back to client
+        try:
+            self.handler.handle_message(self, str(self.data))
+        except ValueError as ex:
+            print ex
 
-        def handleConnected(self):
-            self.handler.clients[self] = None
-            print self.address, "connected"
+    def handleConnected(self):
+        self.handler.clients[self] = None
+        print self.address, "connected"
 
-        def handleClose(self):
-            self.handler.client_disconnected(self)
-            print self.address, "disconnected"
+    def handleClose(self):
+        del self.handler.clients[self]
+        print self.address, "disconnected"
 
+
+class KahootServer():
     def __init__(self, address):
-        self.KahootClient.handler = self
+        KahootClient.handler = self
         self.clients = {}
-        SimpleWebSocketServer.__init__(self, address[0], address[1], self.KahootClient)
+        self.websocket_server = SimpleWebSocketServer(address[0], address[1], KahootClient)
+
+    def run(self):
+        thread = threading.Thread(target=self.websocket_server.serveforever)
+        thread.daemon = True
+        thread.start()
 
     def handle_message(self, client, data):
         data = json.loads(data)
         if data['type'] == 'auth':
+            print "Updating name to", data['data']
             self.clients[client] = (data['data'], None)
-            self.clients_updated()
-
-    def client_disconnected(self, client):
-        # If the client was in the game we update the usernames screen
-        if client in self.clients.keys():
-            self.clients_updated()
-        del self.clients[client]
 
 class Controller:
     def __init__(self, root):
@@ -56,13 +56,16 @@ class Controller:
         self.add_screen(self.waiting_screen)
         self.show_screen(self.waiting_screen)
 
-        self.websocket_server = KahootServer(('', 8080))
+        self.websocket_server = KahootServer(('0.0.0.0', 8080))
         self.websocket_server.clients_updated = self.clients_updated
         # HTTP server in a specific path
         self.http_server = RootedHTTPServer(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))+'\Client',\
-                                            ('', 80), \
+                                            ('0.0.0.0', 8000), \
                                             RootedHTTPRequestHandler)
-        #self.root.attributes('-fullscreen', True)
+        #Update clients view every 1 second
+        self.root.after(1000, self.clients_updated)
+        self.root.attributes('-fullscreen', True)
+        self.root.protocol("WM_DELETE_WINDOW", self.root.destroy)
 
     def add_screen(self, screen):
         screen.pack(side="top", fill="both", expand=True)
@@ -73,13 +76,16 @@ class Controller:
 
     def start_servers(self):
         http_server_thread = threading.Thread(target=self.http_server.serve_forever)
-        websocket_server_thread = threading.Thread(target=self.websocket_server.serveforever)
+        http_server_thread.daemon = True
         http_server_thread.start()
-        websocket_server_thread.start()
+        #Running kahoot websocket server
+        self.websocket_server.run()
         print "Servers started servers"
 
     def clients_updated(self):
-        self.waiting_screen.update_usernames(map(lambda user: user[0], self.websocket_server.clients.values()))
+        print self.websocket_server.clients.values()
+        self.waiting_screen.update_usernames(map(lambda user: user[0], filter(lambda user: user is not None, self.websocket_server.clients.values())))
+        self.root.after(1000, self.clients_updated)
 
 def main():
     root = Tk()
