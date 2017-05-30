@@ -1,5 +1,6 @@
 import Tkinter as tk
-from font import get_font
+from Common.text import get_font
+
 
 class UsernamesWall(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -52,3 +53,8 @@ class WaitingScreen(tk.Frame):
     def update_usernames(self, names):
         self.usernames_wall.update_usernames(names)
 
+    def set_info_label(self, text):
+        self.info_label.config(text=text)
+
+    def update_countdown(self, time_to_start):
+        self.set_info_label('Game starting in ' + str(time_to_start) + ' seconds.')
