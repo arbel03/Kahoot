@@ -1,0 +1,602 @@
+[
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Electronic music producer Kygo&#039;s popularity skyrocketed after a certain remix. Which song did he remix?",
+            "correct_answer": "Ed Sheeran - I See Fire",
+            "incorrect_answers": [
+                "Marvin Gaye - Sexual Healing",
+                "Coldplay - Midnight",
+                "a-ha - Take On Me"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?   ",
+            "correct_answer": "Richard Branson",
+            "incorrect_answers": [
+                "Alan Sugar",
+                "Donald Trump",
+                "Bill Gates"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "According to the BBPA, what is the most common pub name in the UK?",
+            "correct_answer": "Red Lion",
+            "incorrect_answers": [
+                "Royal Oak",
+                "White Hart",
+                "King&#039;s Head"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the world&#039;s most expensive spice by weight?",
+            "correct_answer": "Saffron",
+            "incorrect_answers": [
+                "Cinnamon",
+                "Cardamom",
+                "Vanilla"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "In a standard set of playing cards, which is the only king without a moustache?",
+            "correct_answer": "Hearts",
+            "incorrect_answers": [
+                "Spades",
+                "Diamonds",
+                "Clubs"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "What type of dog is &#039;Handsome Dan&#039;, the mascot of Yale University?",
+            "correct_answer": "Bulldog",
+            "incorrect_answers": [
+                "Yorkshire Terrier",
+                "Boxer",
+                "Pug"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which river flows through the Scottish city of Glasgow?",
+            "correct_answer": "Clyde",
+            "incorrect_answers": [
+                "Tay",
+                "Dee",
+                "Tweed"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is the most common surname Wales?",
+            "correct_answer": "Jones",
+            "incorrect_answers": [
+                "Williams",
+                "Davies",
+                "Evans"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What name represents the letter &quot;M&quot; in the NATO phonetic alphabet?",
+            "correct_answer": "Mike",
+            "incorrect_answers": [
+                "Matthew",
+                "Mark",
+                "Max"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is the first book of the Old Testament?",
+            "correct_answer": "Genesis",
+            "incorrect_answers": [
+                "Exodus",
+                "Leviticus",
+                "Numbers"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Which best selling toy of 1983 caused hysteria, resulting in riots breaking out in stores?",
+            "correct_answer": "Cabbage Patch Kids",
+            "incorrect_answers": [
+                "Transformers",
+                "Care Bears",
+                "Rubik&rsquo;s Cube"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Rolex is a company that specializes in what type of product?",
+            "correct_answer": "Watches",
+            "incorrect_answers": [
+                "Cars",
+                "Computers",
+                "Sports equipment"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What does the &quot;G&quot; mean in &quot;G-Man&quot;?",
+            "correct_answer": "Government",
+            "incorrect_answers": [
+                "Going",
+                "Ghost",
+                "Geronimo"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which language is NOT Indo-European?",
+            "correct_answer": "Hungarian",
+            "incorrect_answers": [
+                "Russian",
+                "Greek",
+                "Latvian"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which essential condiment is also known as Japanese horseradish?",
+            "correct_answer": "Wasabi ",
+            "incorrect_answers": [
+                "Mentsuyu",
+                "Karashi",
+                "Ponzu"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "The words &quot;bungalow&quot; and &quot;shampoo&quot; originate from the languages of which country?",
+            "correct_answer": "India",
+            "incorrect_answers": [
+                "Papua New Guinea",
+                "Ethiopia",
+                "China"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is &quot;dabbing&quot;?",
+            "correct_answer": "A dance",
+            "incorrect_answers": [
+                "A medical procedure",
+                "A sport",
+                "A language"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is the name of the Jewish New Year?",
+            "correct_answer": "Rosh Hashanah",
+            "incorrect_answers": [
+                "Elul",
+                "New Year",
+                "Succoss"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Which one of the following rhythm games was made by Harmonix?",
+            "correct_answer": "Rock Band",
+            "incorrect_answers": [
+                "Meat Beat Mania",
+                "Guitar Hero Live",
+                "Dance Dance Revolution"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is a &quot;dakimakura&quot;?",
+            "correct_answer": "A body pillow",
+            "incorrect_answers": [
+                "A Chinese meal, essentially composed of fish",
+                "A yoga posture",
+                "A word used to describe two people who truly love each other"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What type of animal was Harambe, who was shot after a child fell into it&#039;s enclosure at the Cincinnati Zoo?",
+            "correct_answer": "Gorilla",
+            "incorrect_answers": [
+                "Tiger",
+                "Panda",
+                "Crocodile"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the name of the very first video uploaded to YouTube?",
+            "correct_answer": "Me at the zoo",
+            "incorrect_answers": [
+                "tribute",
+                "carrie rides a truck",
+                "Her new puppy from great grandpa vern."
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "In 2013 how much money was lost by Nigerian scams?",
+            "correct_answer": "$12.7 Billion",
+            "incorrect_answers": [
+                "$95 Million",
+                "$956 Million",
+                "$2.7 Billion"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "How many colors are there in a rainbow?",
+            "correct_answer": "7",
+            "incorrect_answers": [
+                "8",
+                "9",
+                "10"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Which film star has his statue in Leicester Square?",
+            "correct_answer": "Charlie Chaplin",
+            "incorrect_answers": [
+                "Paul Newman",
+                "Rowan Atkinson ",
+                "Alfred Hitchcock"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Which of the following is not another name for the eggplant?",
+            "correct_answer": "Potimarron",
+            "incorrect_answers": [
+                "Brinjal",
+                "Guinea Squash",
+                "Melongene"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Which of the following chemicals are found in eggplant seeds?",
+            "correct_answer": "Nicotine",
+            "incorrect_answers": [
+                "Mescaline",
+                "Cyanide",
+                "Psilocybin"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which of these companies does NOT manufacture automobiles?",
+            "correct_answer": "Ducati",
+            "incorrect_answers": [
+                "Nissan",
+                "GMC",
+                "Fiat"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What was the destination of the missing flight MH370?",
+            "correct_answer": "Beijing",
+            "incorrect_answers": [
+                "Kuala Lumpur",
+                "Singapore",
+                "Tokyo"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What did the Spanish autonomous community of Catalonia ban in 2010, that took effect in 2012?",
+            "correct_answer": "Bullfighting",
+            "incorrect_answers": [
+                "Fiestas",
+                "Flamenco",
+                "Mariachi"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which Italian automobile manufacturer gained majority control of U.S. automobile manufacturer Chrysler in 2011?",
+            "correct_answer": "Fiat",
+            "incorrect_answers": [
+                "Maserati",
+                "Alfa Romeo",
+                "Ferrari"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is on display in the Madame Tussaud&#039;s museum in London?",
+            "correct_answer": "Wax sculptures",
+            "incorrect_answers": [
+                "Designer clothing",
+                "Unreleased film reels",
+                "Vintage cars"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the name given to Indian food cooked over charcoal in a clay oven?",
+            "correct_answer": "Tandoori",
+            "incorrect_answers": [
+                "Biryani",
+                "Pani puri",
+                "Tiki masala"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is the French word for &quot;hat&quot;?",
+            "correct_answer": "Chapeau",
+            "incorrect_answers": [
+                "Bonnet",
+                " &Eacute;charpe",
+                " Casque"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the romanized Japanese word for &quot;university&quot;?",
+            "correct_answer": "Daigaku",
+            "incorrect_answers": [
+                "Toshokan",
+                "Jimusho",
+                "Shokudou"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the Swedish word for &quot;window&quot;?",
+            "correct_answer": "F&ouml;nster",
+            "incorrect_answers": [
+                "H&aring;l",
+                "Sk&auml;rm",
+                "Ruta"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "What is the romanized Chinese word for &quot;airplane&quot;?",
+            "correct_answer": "Feiji",
+            "incorrect_answers": [
+                "Qiche",
+                "Zongxian",
+                "Huojian"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the Italian word for &quot;tomato&quot;?",
+            "correct_answer": "Pomodoro",
+            "incorrect_answers": [
+                "Aglio",
+                "Cipolla",
+                "Peperoncino"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Which musician has collaborated with American producer Porter Robinson and released the 2016 song &quot;Shelter&quot;?",
+            "correct_answer": "Madeon",
+            "incorrect_answers": [
+                "Mat Zo",
+                "deadmau5",
+                "Zedd"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "The Swedish word &quot;Grunka&quot; means what in English?",
+            "correct_answer": "Thing",
+            "incorrect_answers": [
+                "People",
+                "Place",
+                "Pineapple"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "The term &quot;scientist&quot; was coined in which year?",
+            "correct_answer": "1833",
+            "incorrect_answers": [
+                "1933",
+                "1942",
+                "1796"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Five dollars is worth how many nickles?",
+            "correct_answer": "100",
+            "incorrect_answers": [
+                "50",
+                "25",
+                "69"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Which American-owned brewery led the country in sales by volume in 2015?",
+            "correct_answer": "D. G. Yuengling and Son, Inc",
+            "incorrect_answers": [
+                "Anheuser Busch",
+                "Boston Beer Company",
+                "Miller Coors"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "The new One World Trade Center in Manhattan, New York City was designed by which architect? ",
+            "correct_answer": "David Childs",
+            "incorrect_answers": [
+                "Bjarke Ingels",
+                "Michael Arad",
+                "Fumihiko Maki"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "According to Sherlock Holmes, &quot;If you eliminate the impossible, whatever remains, however improbable, must be the...&quot;",
+            "correct_answer": "Truth",
+            "incorrect_answers": [
+                "Answer",
+                "Cause",
+                "Source"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which of the following carbonated soft drinks were introduced first?",
+            "correct_answer": "Dr. Pepper",
+            "incorrect_answers": [
+                "Coca-Cola",
+                "Sprite",
+                "Mountain Dew"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What year was Apple Inc. founded?",
+            "correct_answer": "1976",
+            "incorrect_answers": [
+                "1978",
+                "1980",
+                "1974"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What was the soft drink Pepsi originally introduced as?",
+            "correct_answer": "Brad&#039;s Drink",
+            "incorrect_answers": [
+                "Pepsin Pop",
+                "Carolina Cola",
+                "Pepsin Syrup"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What was the first ever London Underground line to be built?",
+            "correct_answer": "Metropolitan Line",
+            "incorrect_answers": [
+                "Circle Line",
+                "Bakerloo Line",
+                "Victoria Line"
+            ]
+        },
+        {
+            "category": "General Knowledge",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "How tall is the Burj Khalifa?",
+            "correct_answer": "2,722 ft",
+            "incorrect_answers": [
+                "2,717 ft",
+                "2,546 ft",
+                "3,024 ft"
+            ]
+        }
+    ]
