@@ -38,7 +38,10 @@ class SocketServer(socket.socket):
 
     def receive(self, client):
         while 1:
-            data = client.recv(1024)
+            try:
+                data = client.recv(1024)
+            except:
+                break
             if data == '':
                 break
             # Message Received

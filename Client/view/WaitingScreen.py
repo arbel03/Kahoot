@@ -1,5 +1,9 @@
-import Tkinter as tk
-from Common.text import get_font
+try:
+    import Tkinter as tk
+except ImportError:
+    import tkinter as tk
+
+from Client.view.text import get_font
 
 
 class UsernamesWall(tk.Frame):
