@@ -3,7 +3,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "hard",
-            "question": "Electronic music producer Kygo&#039;s popularity skyrocketed after a certain remix. Which song did he remix?",
+            "question": "Electronic music producer Kygo&#039;s popularity skyrocketed after a certain remix.\nWhich song did he remix?",
             "correct_answer": "Ed Sheeran - I See Fire",
             "incorrect_answers": [
                 "Marvin Gaye - Sexual Healing",
@@ -15,7 +15,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "easy",
-            "question": "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?   ",
+            "question": "Virgin Trains, Virgin Atlantic and Virgin Racing,\n are all companies owned by which famous entrepreneur?",
             "correct_answer": "Richard Branson",
             "incorrect_answers": [
                 "Alan Sugar",
@@ -51,7 +51,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "In a standard set of playing cards, which is the only king without a moustache?",
+            "question": "In a standard set of playing cards,\n which is the only king without a moustache?",
             "correct_answer": "Hearts",
             "incorrect_answers": [
                 "Spades",
@@ -63,7 +63,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "hard",
-            "question": "What type of dog is &#039;Handsome Dan&#039;, the mascot of Yale University?",
+            "question": "What type of dog is &#039;Handsome Dan&#039;,\n the mascot of Yale University?",
             "correct_answer": "Bulldog",
             "incorrect_answers": [
                 "Yorkshire Terrier",
@@ -99,7 +99,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "easy",
-            "question": "What name represents the letter &quot;M&quot; in the NATO phonetic alphabet?",
+            "question": "What name represents the letter &quot;M&quot;\nin the NATO phonetic alphabet?",
             "correct_answer": "Mike",
             "incorrect_answers": [
                 "Matthew",
@@ -123,7 +123,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "easy",
-            "question": "Which best selling toy of 1983 caused hysteria, resulting in riots breaking out in stores?",
+            "question": "Which best selling toy of 1983 caused hysteria,\n resulting in riots breaking out in stores?",
             "correct_answer": "Cabbage Patch Kids",
             "incorrect_answers": [
                 "Transformers",
@@ -171,7 +171,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "Which essential condiment is also known as Japanese horseradish?",
+            "question": "Which essential condiment is also\nknown as Japanese horseradish?",
             "correct_answer": "Wasabi ",
             "incorrect_answers": [
                 "Mentsuyu",
@@ -183,7 +183,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "hard",
-            "question": "The words &quot;bungalow&quot; and &quot;shampoo&quot; originate from the languages of which country?",
+            "question": "The words &quot;bungalow&quot; and &quot;shampoo&quot;\noriginate from the languages of which country?",
             "correct_answer": "India",
             "incorrect_answers": [
                 "Papua New Guinea",
@@ -243,7 +243,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "easy",
-            "question": "What type of animal was Harambe, who was shot after a child fell into it&#039;s enclosure at the Cincinnati Zoo?",
+            "question": "What type of animal was Harambe,\nwho was shot after a child fellinto\nit&#039;s enclosure at the Cincinnati Zoo?",
             "correct_answer": "Gorilla",
             "incorrect_answers": [
                 "Tiger",
@@ -351,7 +351,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "What did the Spanish autonomous community of Catalonia ban in 2010, that took effect in 2012?",
+            "question": "What did the Spanish autonomous community\nof Catalonia ban in 2010, that took\neffect in 2012?",
             "correct_answer": "Bullfighting",
             "incorrect_answers": [
                 "Fiestas",
@@ -363,7 +363,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "Which Italian automobile manufacturer gained majority control of U.S. automobile manufacturer Chrysler in 2011?",
+            "question": "Which Italian automobile manufacturer gained\nmajority control of U.S. automobile manufacturer \nChrysler in 2011?",
             "correct_answer": "Fiat",
             "incorrect_answers": [
                 "Maserati",
@@ -387,7 +387,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "What is the name given to Indian food cooked over charcoal in a clay oven?",
+            "question": "What is the name given to Indian food\ncooked over charcoal in a clay oven?",
             "correct_answer": "Tandoori",
             "incorrect_answers": [
                 "Biryani",
@@ -459,7 +459,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "hard",
-            "question": "Which musician has collaborated with American producer Porter Robinson and released the 2016 song &quot;Shelter&quot;?",
+            "question": "Which musician has collaborated with American producer Porter Robinson\nand released the 2016 song &quot;Shelter&quot;?",
             "correct_answer": "Madeon",
             "incorrect_answers": [
                 "Mat Zo",
@@ -519,7 +519,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "The new One World Trade Center in Manhattan, New York City was designed by which architect? ",
+            "question": "The new One World Trade Center in Manhattan,\nNew York City was designed by which architect? ",
             "correct_answer": "David Childs",
             "incorrect_answers": [
                 "Bjarke Ingels",
@@ -531,7 +531,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "easy",
-            "question": "According to Sherlock Holmes, &quot;If you eliminate the impossible, whatever remains, however improbable, must be the...&quot;",
+            "question": "According to Sherlock Holmes, &quot;If you eliminate the impossible,\nwhatever remains, however improbable, must be the...&quot;",
             "correct_answer": "Truth",
             "incorrect_answers": [
                 "Answer",
@@ -543,7 +543,7 @@
             "category": "General Knowledge",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "Which of the following carbonated soft drinks were introduced first?",
+            "question": "Which of the following carbonated\nsoft drinks were introduced first?",
             "correct_answer": "Dr. Pepper",
             "incorrect_answers": [
                 "Coca-Cola",

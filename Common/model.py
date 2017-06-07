@@ -1,5 +1,6 @@
 import uuid
 import json
+import sys
 
 
 class Question(object):
@@ -7,11 +8,13 @@ class Question(object):
     A class that inherits from dictionary and is reassembling a trivia question,
     The first answer in the answers array is the correct answer
     """
-    def __init__(self, question, correct_answer, wrong_answers, time):
+    def __init__(self, question, correct_answer, wrong_answers, time, score):
         self.time = time
         self.question = question
         self.correct_answer = correct_answer
         self.wrong_answers = wrong_answers
+        self.time_left = sys.maxint
+        self.score = score
 
     def get_answers(self):
         import random
@@ -27,7 +30,8 @@ class Question(object):
         return {'time': self.time,
                 'question': self.question,
                 'correct_answer': self.correct_answer.__dict__,
-                'wrong_answers': map(lambda ans: ans.__dict__, self.wrong_answers)}
+                'wrong_answers': map(lambda ans: ans.__dict__, self.wrong_answers),
+                'score': self.score}
 
     @staticmethod
     def get_question_time(difficulty):
@@ -35,11 +39,17 @@ class Question(object):
         return difficulties[difficulty] if difficulty in difficulties.keys() else 45
 
     @staticmethod
+    def get_question_score(difficulty):
+        scores = {'easy': 100, 'medium': 200, 'hard': 300}
+        return scores[difficulty] if difficulty in scores.keys() else 200
+
+    @staticmethod
     def parse_question(obj):
         return Question(question=obj['question'],
                         correct_answer=Answer.parse_answer(obj['correct_answer']),
                         wrong_answers=map(Answer.parse_answer, obj['wrong_answers']),
-                        time=obj['time'])
+                        time=obj['time'],
+                        score=obj['score'])
 
 
 class Answer(object):
@@ -57,6 +67,7 @@ class Answer(object):
     def __repr__(self):
         # So __dict__ of question will include the __dict__ of answer
         return self.__dict__
+
 
 class Quiz:
     def __init__(self, questions):
@@ -82,13 +93,33 @@ class Quiz:
             while trivia_question in questions:
                 trivia_question = random.choice(_questions)
 
-            #print 'Correct answer: ' + trivia_question['correct_answer']
+            # print 'Correct answer: ' + trivia_question['correct_answer']
             q = Question(question=trivia_question['question'],
                          correct_answer=Answer(trivia_question['correct_answer']),
                          wrong_answers=map(Answer, trivia_question['incorrect_answers']),
-                         time=Question.get_question_time(trivia_question['difficulty']))
+                         time=Question.get_question_time(trivia_question['difficulty']),
+                         score=Question.get_question_score(trivia_question['difficulty']))
             questions.append(q)
         return Quiz(questions)
 
-class Score(object):
-    pass
+
+class Player(object):
+    def __init__(self, username):
+        self.username = username
+        self.score = 0
+        self.last_answer = None
+        self.correct = None
+
+    def get_score(self):
+        return self.score
+
+    def get_correct(self):
+        return self.correct
+
+    def answered(self, answer_id, question):
+        if answer_id == question.correct_answer.id:
+            self.correct = True
+            # The ratio of time left and the total time of the question multiplied by the score.
+            self.score += int((float(question.time_left)/question.time)*question.score)
+        else:
+            self.correct = False

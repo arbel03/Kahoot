@@ -2,6 +2,7 @@ import threading
 
 from server.server import SocketServer
 from Common.model import *
+from Common.khtdirsrvlib import update as update_server_info
 
 class GameState:
     waiting,\
@@ -11,25 +12,38 @@ class GameState:
     stopping,\
     ended = range(6)
 
+class SocketServerHandler:
+    def handle_connect(self, client):
+        pass
+
+    def handle_message(self, client, message):
+        pass
+
+    def handle_disconnect(self, client):
+        pass
+
 class KahootServerSocket(SocketServer):
     def __init__(self, address, handler):
         SocketServer.__init__(self, address)
-        self.handler = handler
+        if isinstance(handler, SocketServerHandler):
+            self.handler = handler
 
     def onopen(self, client):
-        self.handler.handle_connect(client)
+        if self.handler:
+            self.handler.handle_connect(client)
 
     def onmessage(self, client, message):
-        self.handler.handle_message(client, message)
+        if self.handler:
+            self.handler.handle_message(client, message)
 
     def onclose(self, client):
-        self.handler.handle_disconnect(client)
+        if self.handler:
+            self.handler.handle_disconnect(client)
 
-
-class KahootServer():
+class KahootServer(SocketServerHandler):
     TIME_TO_START = 15
     MIN_PLAYERS = 2
-    WAITING_TIME = 5
+    WAITING_TIME = 10
     AMOUNT_OF_QUESTIONS = 7
 
     def __init__(self, address, state_update_callback):
@@ -46,7 +60,7 @@ class KahootServer():
         self.socket.run()
 
     def get_online_users(self):
-        return filter(lambda tup: tup[0] != None, filter(None, self.clients.values()))
+        return filter(None, self.clients.values())
 
     def get_online_users_count(self):
         return len(self.get_online_users())
@@ -60,15 +74,16 @@ class KahootServer():
     def handle_message(self, client, data):
         data = json.loads(data)
         if data['type'] == 'auth':
-            self.clients[client] = (data['data'], False)
+            # Client connected and authenticated
+            self.clients[client] = Player(data['data'])
             online_users_count = self.get_online_users_count()
             if online_users_count >= KahootServer.MIN_PLAYERS and (self.current_state == GameState.waiting):
                 # Telling the game to start his 'KahootServer.TIME_TO_START' seconds timer before game starts
                 self.update_state(GameState.starting, time=KahootServer.TIME_TO_START)
         elif data['type'] == 'answer':
             answer_id = data['data']
-            correct = answer_id == self.current_question.correct_answer.id
-            self.clients[client] = (self.clients[client][0], correct)
+            if self.clients[client]:
+                self.clients[client].answered(answer_id, question=self.current_question)
 
     def send_question(self):
         online_users_count = self.get_online_users_count()
@@ -83,9 +98,13 @@ class KahootServer():
         else: # If not, the game has ended
             self.update_state(GameState.ended)
 
+    # So we can have a better scoring system
+    def update_time_left(self, time_left):
+        self.current_question.time_left = time_left
+
     def broadcast(self, data):
-        for (socket, (username, current_answer)) in self.clients.iteritems():
-            if username != None:
+        for (socket, player) in self.clients.iteritems():
+            if player != None:
                 socket.send(data)
 
     def update_state(self, new_state, **kwargs):
@@ -104,14 +123,17 @@ class KahootServer():
             self.update_state(GameState.stopping, message="Not enough players to start the game...")
 
     def handle_connect(self, client):
-        self.clients[client] = (None, False)
-
+        self.clients[client] = None
 
 class Controller:
     def __init__(self):
         self.game_manager = KahootServer(('0.0.0.0', 8080), self.state_updated) # This is our model
         self.game_manager.set_quiz(Quiz.load_quiz(KahootServer.AMOUNT_OF_QUESTIONS)) # Loading quiz
         self.wait_for_clients()
+
+        from socket import gethostbyname,gethostname
+        # Updating khtdirsrvlib
+        update_server_info('arbel', gethostbyname(gethostname()), 8080)
 
     # This function updates all the connected players what other players are waiting for updating the waiting screen.
     # The loop stops automatically when the game is not in waiting state, this is why it should be called manually.
@@ -128,7 +150,7 @@ class Controller:
                             self.game_manager.current_state==GameState.starting):
                 break
             # Do the updating here
-            self.game_manager.broadcast(json.dumps({'type': 'waiting', 'data': self.game_manager.get_online_users()}))
+            self.game_manager.broadcast(json.dumps({'type': 'waiting', 'data': map(lambda user: user.username, self.game_manager.get_online_users())}))
             time.sleep(0.5)
 
     def start_server(self):
@@ -145,8 +167,9 @@ class Controller:
         elif state == GameState.stopping:
             print "Stopping game, " + str(kwargs['message'])
             self.game_manager.broadcast(json.dumps({'type':'stopping', 'data':{'message': kwargs['message']}}))
-            # Waiting for clients again, doing this after 1.5 seconds so the previous waiting for clients block can be closed
-            self.timer(1.5, finished_callback=self.wait_for_clients, update_callback=None)
+            self.game_manager.set_quiz(Quiz.load_quiz(KahootServer.AMOUNT_OF_QUESTIONS))
+            # Waiting for clients again, doing this after 2 seconds so the previous waiting for clients block can be closed
+            self.timer(1.1, finished_callback=self.wait_for_clients, update_callback=None)
         elif state == GameState.question_in_progress:
             print "Sending question."
             # Sending question to everybody
@@ -155,22 +178,22 @@ class Controller:
             if not isinstance(question, Question):
                 raise ValueError("A question passed must be of type 'Question'")
             # Setting question
-            self.timer(question.time, update_callback=None, finished_callback=self.wait_after_question)
+            self.timer(question.time, update_callback=self.game_manager.update_time_left, finished_callback=self.wait_after_question)
         elif state == GameState.waiting_after_question:
-            for client in self.game_manager.clients.keys():
-                username = self.game_manager.clients[client][0]
-                if username == None:
-                    continue
-                correct = self.game_manager.clientss[client][1]
-                print "User %s was %s." % (username, "correct" if correct else "wrong")
-                client.send(json.dumps({'type': 'waiting_after_question', 'data': {'correct': correct,
-                                                                                   'message': 'You were correct.' if correct else 'You were wrong.'}}))
-                # Resetting answer
-                self.game_manager.clients[client] = (username, False)
             print "Waiting after question for " + str(kwargs['waiting_time']) + " seconds."
+            for client in self.game_manager.clients.keys():
+                player = self.game_manager.clients[client]
+                correct = player.get_correct()
+                print correct
+                player.correct = None
+                client.send(json.dumps({'type': 'waiting_after_question', 'data': {'correct': correct if correct != None else False,'message': 'Your score is %s'%(player.get_score())}}))
+
             self.timer(kwargs['waiting_time'], update_callback=None, finished_callback=self.game_manager.send_question)
         elif state == GameState.ended:
-            self.game_manager.set_quiz(Quiz.load_quiz(KahootServer.AMOUNT_OF_QUESTIONS))
+            self.game_manager.update_state(GameState.stopping, message="Game Ended.\nWaiting for players...")
+            # Starting another game if enough players are online
+            if self.game_manager.get_online_users_count() >= KahootServer.MIN_PLAYERS:
+                self.game_manager.update_state(GameState.starting, time=KahootServer.TIME_TO_START)
 
     def wait_after_question(self):
         self.game_manager.wait_after_question()

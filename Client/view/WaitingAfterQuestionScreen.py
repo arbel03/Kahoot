@@ -9,11 +9,11 @@ class WaitingAfterQuestionScreen(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
 
-        self.message_label = tk.Label(self, font=get_font(12), fg='white')
+        self.message_label = tk.Label(self, font=get_font(18, True), fg='white')
         self.message_label.pack(side='bottom', pady=16)
 
         self.info_label = tk.Label(self, font=get_font(36), fg='white')
-        self.info_label.pack(anchor='center', fill="both", pady=128)
+        self.info_label.pack(side='top', anchor='center', fill="both", expand=True)
 
     def set_correct(self, correct, message):
         self.message_label.config(text=message)

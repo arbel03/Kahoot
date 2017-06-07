@@ -7,6 +7,7 @@ import threading
 import Queue
 
 from Common.model import *
+from Common.khtdirsrvlib import get_details as get_server_details
 from Client.view.GameScreen import GameScreen
 from Client.view.WaitingScreen import WaitingScreen
 from Client.view.WaitingAfterQuestionScreen import WaitingAfterQuestionScreen
@@ -57,7 +58,7 @@ class Controller:
     def handle_response(self, response):
         temp = json.loads(response)
         if temp['type'] == 'waiting':
-            self.waiting_screen.update_usernames(map(lambda tup: tup[0], temp['data']))
+            self.waiting_screen.update_usernames(temp['data'])
         elif temp['type'] == 'starting':
             self.timer(temp['data']['time'],
                        update_callback=self.waiting_screen.update_countdown,
@@ -82,25 +83,25 @@ class Controller:
 
     def connect(self):
         try:
-            self.socket.connect(('127.0.0.1', 8080))
-            self.waiting_screen.set_info_label('Connecting...')
-            self.socket.send(json.dumps({'type': 'auth', 'data': raw_input("Enter your username: ")}))
-            self.waiting_screen.set_info_label('Connected')
+            details = get_server_details('arbel')
+            if details['status'] == 'OK':
+                # Connecting
+                self.socket.connect((details['result']['ipaddr'], details['result']['port']))
+                self.waiting_screen.set_info_label('Connecting...')
+                self.socket.send(json.dumps({'type': 'auth', 'data': raw_input("Enter your username: ")}))
+                self.waiting_screen.set_info_label('Connected')
 
-            listenning_thread = threading.Thread(target=self.receive)
-            listenning_thread.daemon = True
-            listenning_thread.start()
+                listenning_thread = threading.Thread(target=self.receive)
+                listenning_thread.daemon = True
+                listenning_thread.start()
 
-            return True
         except socket.error as ex:
-            print ex
             if ex.errno == 10061:
                 self.waiting_screen.set_info_label('Server is not active')
             else:
                 self.waiting_screen.set_info_label('Failed connecting to the server...')
             # Closing the screen
             self.root.after(3000, self.root.destroy)
-        return False
 
     def receive(self):
         print "Running"

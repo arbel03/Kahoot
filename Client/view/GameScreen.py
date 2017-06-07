@@ -100,6 +100,7 @@ class GameScreen(tk.Frame):
         self.columnconfigure(0, weight=1)
 
     def set_widgets(self):
+        self.buttons.grid_propagate(0)
         self.buttons.grid(row=1, column=0, pady=16, padx=16, sticky='NSEW')
         self.info_pane.grid(row=0, column=0, pady=16, padx=32, sticky='NSEW')
 
